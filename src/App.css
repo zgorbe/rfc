@@ -1,0 +1,78 @@
+#root {
+    margin-top: 20px;
+}
+
+#root .loading {
+    background: url('./assets/loading_spinner.gif') center no-repeat;
+    height: 30vw;
+    width: 100vw;
+}
+  
+#root .fb {
+    background-image: url(./assets/fb.svg);
+    cursor: pointer;
+}
+#root .fh {
+    background-image: url(./assets/fh.svg);
+    cursor: pointer;
+}
+#root .ff {
+    background-image: url(./assets/ff.svg);
+    cursor: pointer;
+}
+#root .fk {
+    background-image: url(./assets/fk.svg);
+    cursor: pointer;
+}
+#root .fv {
+    background-image: url(./assets/fv.svg);
+    cursor: pointer;
+}
+#root .fp {
+    background-image: url(./assets/fp.svg);
+    cursor: pointer;
+}
+
+#root .vb {
+    background-image: url(./assets/vb.svg);
+    cursor: pointer;
+}
+#root .vh {
+    background-image: url(./assets/vh.svg);
+    cursor: pointer;
+}
+#root .vf {
+    background-image: url(./assets/vf.svg);
+    cursor: pointer;
+}
+#root .vk {
+    background-image: url(./assets/vk.svg);
+    cursor: pointer;
+}
+#root .vv {
+    background-image: url(./assets/vv.svg);
+    cursor: pointer;
+}
+#root .vp {
+    background-image: url(./assets/vp.svg);
+    cursor: pointer;
+}
+
+#root .rotated {
+    transform: rotate(180deg);
+}
+
+#root .rotated .field, #root .rotated .modal, #root .rotated .figure-container .figure {
+    transform: rotate(180deg);
+}
+
+#root .note {
+    font-style: italic;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#root .buttons {
+    margin-top: 20px;
+    text-align: center;
+}

@@ -1,0 +1,70 @@
+.chess-table {
+    border: 1vw solid #422;
+}
+
+.chess-table .field {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80% 80%;
+
+    float: left;
+    position: relative;
+    width: 12.5%;
+}
+.chess-table .field:before {
+    content: '';
+    display: block;
+    padding: 50% 0;
+}
+
+.chess-table .field.available, .chess-table .field.attacked {
+    cursor: pointer;
+}
+        
+.chess-table .field.selected {
+    background-color: #755 !important;
+}
+
+.chess-table .field:nth-child(n+1):nth-child(even):nth-child(-n+8) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+9):nth-child(odd):nth-child(-n+16) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+17):nth-child(even):nth-child(-n+24) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+25):nth-child(odd):nth-child(-n+32) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+33):nth-child(even):nth-child(-n+40) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+41):nth-child(odd):nth-child(-n+48) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+49):nth-child(even):nth-child(-n+56) {
+    background-color: #999;
+}
+.chess-table .field:nth-child(n+57):nth-child(odd):nth-child(-n+64) {
+    background-color: #999;
+}
+
+.chess-table.highlighting .field.available:after, .chess-table.highlighting .field.last:after {
+    background-color: #050;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.chess-table.highlighting .field.attacked:after {
+    background-color: #A00 !important;
+}
+
+.chess-table.highlighting .field.last:after {
+    background-color: #CEF;
+}
