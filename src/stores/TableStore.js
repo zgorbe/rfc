@@ -12,6 +12,9 @@ import { checkRef } from '../firebase';
 import { mateRef } from '../firebase';
 import { drawRef } from '../firebase';
 
+import chess from '../chess';
+import utils from '../utils';
+
 class TableStore extends EventEmitter {
     table = []
     constructor() {
@@ -37,15 +40,25 @@ class TableStore extends EventEmitter {
             var isUpdateInSameRow = sourceField.row === targetField.row,
                 sourceRow = tableData[sourceField.row],
                 figureToMove = sourceRow.charAt(sourceField.index - 1),
-                updatedSourceRow = this.stringReplaceAt(sourceRow, 'X', sourceField.index - 1),
+                updatedSourceRow = utils.stringReplaceAt(sourceRow, 'X', sourceField.index - 1),
                 targetRow = isUpdateInSameRow ? updatedSourceRow : tableData[targetField.row],
-                updatedTargetRow = this.stringReplaceAt(targetRow, figureToMove, targetField.index - 1);
+                updatedTargetRow = utils.stringReplaceAt(targetRow, figureToMove, targetField.index - 1);
 
             Promise.all([
                 isUpdateInSameRow ? Promise.resolve() : tableRef.child(sourceField.row).set(updatedSourceRow),
                 tableRef.child(targetField.row).set(updatedTargetRow)
             ]).then(() => {
                 this.clearSelectedField();
+
+                // delete a figure
+                if (targetField.figure !== 'X') {
+                    if (chess.getFigureColor(targetField.figure) === 'black') {
+                        deletedBlacksRef.push(targetField.figure);
+                    } else {
+                        deletedWhitesRef.push(targetField.figure);
+                    }
+                }
+
                 this.emit('figureMovingEnd');
             });
         });
@@ -109,10 +122,6 @@ class TableStore extends EventEmitter {
             }            
             default: break;
         }
-    }
-    
-    stringReplaceAt(str, repl, index) {
-        return str.substr(0, index) + repl + str.substr(index + repl.length);
     }
 }
 const tableStore = new TableStore();
