@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-class ChessField extends Component {
-
+class SmartModal extends Component {
     render() { 
         return ( 
             <Modal isOpen={this.props.isOpen}>
@@ -18,6 +17,5 @@ class ChessField extends Component {
         );
     }
 }
- 
 
-export default ChessField;
+export default SmartModal;
