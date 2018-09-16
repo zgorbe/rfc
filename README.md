@@ -1,6 +1,6 @@
 # React Firebase Chess
 
-> A chess game using React, Flux and Firebase. Implementation of the chess engine is in progress, currently only a simple online chess board.
+> A chess game using React, Flux and Firebase. It's only a simple online chess board without implementing the rules of chess. My Vue.js chess game implements the rules of chess as well: https://github.com/zgorbe/vfc.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 

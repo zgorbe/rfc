@@ -5,7 +5,6 @@ import TableStore from './stores/TableStore';
 import * as TableActions from './actions/TableActions';
 import SmartModal from './components/SmartModal';
 import { Button } from 'reactstrap';
-
 import './App.css';
 
 class App extends Component {

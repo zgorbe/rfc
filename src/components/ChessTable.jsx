@@ -13,11 +13,7 @@ class ChessTable extends Component {
     componentWillMount() {
         TableStore.on('change', this.handleTableChanged);
 
-        TableStore.on('selectedFieldChanged', (field) => {
-            this.setState({
-                selectedField: field
-            });
-        });
+        TableStore.on('selectedFieldChanged', this.handleSelectedFieldChanged);
 
         TableStore.on('figureMovingStart', () => {
             this.setState({
@@ -30,14 +26,28 @@ class ChessTable extends Component {
                 isFigureMoving: false
             });
         });
+
+        TableStore.on('newAvailableFields', this.handleNewAvailableFields);
     }
     componentWillUnmount() {
         TableStore.removeListener('change', this.handleTableChanged);
+        TableStore.removeListener('newAvailableFields', this.handleNewAvailableFields);
+        TableStore.removeListener('selectedFieldChanged', this.handleSelectedFieldChanged);
     }
     
     handleTableChanged = () => {
         this.setState({
             table: TableStore.getTable()
+        });
+    }
+
+    handleNewAvailableFields = (availableFields) => {
+        console.log(availableFields)
+    }        
+
+    handleSelectedFieldChanged = (field) => {
+        this.setState({
+            selectedField: field
         });
     }
 
@@ -55,8 +65,8 @@ class ChessTable extends Component {
                 { 
                     this.state.table.map( (row, rowIndex) => { 
                         return row.split('').map((figure, index) => 
-                            <ChessField figure={figure} row={rowIndex} index={index + 1} getSelectedField={ this.getSelectedField }
-                                isFigureMoving={ this.isFigureMoving } key={ rowIndex + ' ' + index} />)
+                            <ChessField figure={ figure } row={ rowIndex } index={ index + 1 } getSelectedField={ this.getSelectedField }
+                                isFigureMoving={ this.isFigureMoving } key={ rowIndex + ' ' + index } />)
                     }) 
                 }
             </div> 

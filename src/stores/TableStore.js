@@ -12,11 +12,11 @@ import { checkRef } from '../firebase';
 import { mateRef } from '../firebase';
 import { drawRef } from '../firebase';
 
-import chess from '../chess';
 import utils from '../utils';
 
 class TableStore extends EventEmitter {
     table = []
+    lastMove
     constructor() {
         super();
 
@@ -24,6 +24,10 @@ class TableStore extends EventEmitter {
             this.table = snapshot.val();
 
             this.emit('change');
+        });
+      
+        lastMoveRef.on('value', snapshot => {
+            this.lastMove = snapshot.val();
         });
     }
 
@@ -52,12 +56,14 @@ class TableStore extends EventEmitter {
 
                 // delete a figure
                 if (targetField.figure !== 'X') {
-                    if (chess.getFigureColor(targetField.figure) === 'black') {
+                    if (utils.getFigureColor(targetField.figure) === 'black') {
                         deletedBlacksRef.push(targetField.figure);
                     } else {
                         deletedWhitesRef.push(targetField.figure);
                     }
                 }
+
+                lastMoveRef.set([sourceField, targetField]);
 
                 this.emit('figureMovingEnd');
             });
@@ -105,11 +111,16 @@ class TableStore extends EventEmitter {
         this.emit('selectedFieldChanged', { row: -1, index: -1, figure: 'X' });
     }
 
+    handleSelectField = (field) => {
+        // do selection
+        this.emit('selectedFieldChanged', field);
+    }
+
     handleActions = (action) => {
         console.log('TableStore received action', action);
         switch(action.type) {
             case ActionTypes.SELECT_FIELD: {
-                this.emit('selectedFieldChanged', action.field);
+                this.handleSelectField(action.field);
                 break;
             }
             case ActionTypes.FIGURE_MOVING: {
